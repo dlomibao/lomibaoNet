@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: net.lomibao
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [ annotation-api, app-name, cache-caffeine, data, data-jdbc, flyway, graalvm, gradle, graphql, http-client, java, java-application, jdbc-hikari, junit, lombok, management, netty-server, openapi, postgres, readme, security, security-annotations, security-jwt, security-oauth2, shade, slf4j-simple, spring, spring-boot, testcontainers, views-thymeleaf, yaml ]
