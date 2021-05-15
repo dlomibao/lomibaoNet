@@ -2,21 +2,16 @@
   <div id="app" class="container">
     <NavHeader class="navbar"/>
     <router-view class="main"/>
-<!--    <home class="main"></home>-->
-<!--    <dino-view class="main"/>-->
     <footer class="foot">&#169;2021 Derek Lomibao</footer>
   </div>
 </template>
 
 <script>
-//import DinoView from "@/components/DinoView"
 import NavHeader from "@/components/NavHeader"
 //import Home from "@/views/Home";
 export default {
   name: 'App',
   components: {
-    //Home,
-    //DinoView:DinoView,
     NavHeader:NavHeader
   }
 }
