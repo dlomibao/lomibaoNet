@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y%m%d.%H%M%S')"
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: ./LomibaoNet_WebUI/dist
-          remote: /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}
+          remote: /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${GITHUB_SHA::6}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
@@ -68,5 +68,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }} /var/www/stg.lomibao.net
+          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${GITHUB_SHA::6} /var/www/stg.lomibao.net
           
