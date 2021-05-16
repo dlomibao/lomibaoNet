@@ -25,7 +25,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
       - name: Set short sha
         id: sha
-        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
         
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
