@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Categories.vue"
+  name: "Categories"
 }
 </script>
 
