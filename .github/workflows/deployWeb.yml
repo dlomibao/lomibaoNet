@@ -23,6 +23,10 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: Set short sha
+        id: sha
+        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+        
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -48,18 +52,11 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: ./LomibaoNet_WebUI/dist
-          remote: /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${{GITHUB_SHA::6}}
+          remote: /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${{steps.sha.outputs.sha}}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
       
-#       - name: ls -a via ssh
-#         uses: garygrossgarten/github-action-ssh@release
-#         with:
-#           command: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }} /var/www/stg.lomibao.net
-#           host: ${{ secrets.HOST }}
-#           username: ${{ secrets.SSH_USER }}
-#           passphrase: ${{ secrets.PASSWORD }}
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -68,5 +65,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${{GITHUB_SHA::6}} /var/www/stg.lomibao.net
+          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }}.${{steps.sha.outputs.sha}} /var/www/stg.lomibao.net
           
