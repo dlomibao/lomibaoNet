@@ -53,11 +53,20 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
       
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@release
+#       - name: ls -a via ssh
+#         uses: garygrossgarten/github-action-ssh@release
+#         with:
+#           command: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }} /var/www/stg.lomibao.net
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.SSH_USER }}
+#           passphrase: ${{ secrets.PASSWORD }}
+          
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
         with:
-          command: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }} /var/www/stg.lomibao.net
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
-          passphrase: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.date.outputs.date }} /var/www/stg.lomibao.net
           
