@@ -52,7 +52,6 @@ jobs:
         with:
           name: lomiWeb
           path: lomiWeb.${{ steps.sha.outputs.sha }}.zip
-        retention-days: 5
     
         
      
