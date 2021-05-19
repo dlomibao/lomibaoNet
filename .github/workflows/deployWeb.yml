@@ -45,7 +45,8 @@ jobs:
         run: npm run build
       
       - name: package
-        run: zip -r lomiWeb.${{ steps.sha.outputs.sha }}.zip ./LomibaoNet_WebUI/dist
+        working-directory: ./LomibaoNet_WebUI
+        run: zip -r lomiWeb.${{ steps.sha.outputs.sha }}.zip ./dist
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
@@ -71,7 +72,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lomiWeb
-      - name: Extract artifact to /dist
+      - name: Extract artifact to ./dist
         run: unzip lomiWeb.${{ steps.sha.outputs.sha }}.zip
 
       - name: Copy folder content recursively to remote
