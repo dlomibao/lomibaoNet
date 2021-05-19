@@ -60,6 +60,9 @@ jobs:
   deployStg:
     needs: [build]
     runs-on: ubuntu-latest
+    environment:
+            name: stg
+            url: https://stg.lomibao.net
     steps:
       - name: Get current date
         id: date
@@ -98,6 +101,9 @@ jobs:
   deployPrd:
     needs: [deployStg]
     runs-on: ubuntu-latest
+    environment:
+      name: prd
+      url: https://lomibao.net
     steps:
       - name: Set short sha
         id: sha
