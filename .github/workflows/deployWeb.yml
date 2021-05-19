@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lomiWeb
-        path: lomiWeb.${{ steps.sha.outputs.sha }}.zip
+          path: lomiWeb.${{ steps.sha.outputs.sha }}.zip
         retention-days: 5
     
         
