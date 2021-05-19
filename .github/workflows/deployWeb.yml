@@ -49,6 +49,7 @@ jobs:
         run: zip -r lomiWeb.${{ steps.sha.outputs.sha }}.zip ./dist
 
       - name: 'Upload Artifact'
+        working-directory: ./LomibaoNet_WebUI
         uses: actions/upload-artifact@v2
         with:
           name: lomiWeb
