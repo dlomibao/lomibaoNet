@@ -54,15 +54,13 @@ jobs:
           name: lomiWeb
           path: ./LomibaoNet_WebUI/lomiWeb.${{ steps.sha.outputs.sha }}.zip
     
-        
-     
   
   deployDev:
     needs: [build]
     runs-on: ubuntu-latest
     environment:
-            name: dev
-            url: https://dev.lomibao.net
+      name: dev
+      url: https://dev.lomibao.net
     steps:
       - name: Get current date
         id: date
@@ -99,22 +97,22 @@ jobs:
          
   deployStg:
     needs: [deployDev]
-      runs-on: ubuntu-latest
-      environment:
-        name: stg
-        url: https://stg.lomibao.net
-      steps:
-        - name: Set short sha
-          id: sha
-          run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
-        - name: executing remote ssh commands using password
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.SSH_USER }}
-            password: ${{ secrets.PASSWORD }}
-            port: 22
-            script: ln -sfn /var/www/builds/lomibao.net.${{ steps.sha.outputs.sha }} /var/www/stg.lomibao.net
+    runs-on: ubuntu-latest
+    environment:
+      name: stg
+      url: https://stg.lomibao.net
+    steps:
+      - name: Set short sha
+        id: sha
+        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: ln -sfn /var/www/builds/lomibao.net.${{ steps.sha.outputs.sha }} /var/www/stg.lomibao.net
 
   deployPrd:
     needs: [deployStg]
