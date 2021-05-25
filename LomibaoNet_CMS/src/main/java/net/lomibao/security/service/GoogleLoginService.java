@@ -5,8 +5,6 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import io.micronaut.context.annotation.Value;
-import io.micronaut.http.client.RxHttpClient;
-import io.micronaut.http.client.annotation.Client;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
@@ -19,8 +17,9 @@ public class GoogleLoginService {
 
     @Value("${login.google.client-id}")
     private String CLIENT_ID;
-    private NetHttpTransport transport=new NetHttpTransport();
-    private GsonFactory gsonFactory=new GsonFactory();
+    private NetHttpTransport transport = new NetHttpTransport();
+    private GsonFactory gsonFactory = new GsonFactory();
+
     public GoogleLoginService() {
 
     }
