@@ -9,7 +9,7 @@ micronaut:
         signatures:
           secret:
             generator:
-              secret: ${GENERATOR_SECRET}
+              secret: ${GENERATOR_SECRET:}
   endpoints:
     logout:
       get-allowed: true
@@ -19,8 +19,8 @@ micronaut:
 
 login:
   google:
-    client-id: ${CLIENT_ID}
-    client-secret: ${CLIENT_SECRET}
+    client-id: ${CLIENT_ID:}
+    client-secret: ${CLIENT_SECRET:}
 
 
 
@@ -33,8 +33,8 @@ datasources:
   default:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/lomibao_cms_local}
     driverClassName: org.postgresql.Driver
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    username: ${DB_USER:}
+    password: ${DB_PASSWORD:}
     #schema-generate: CREATE_DROP
     dialect: POSTGRES
 
